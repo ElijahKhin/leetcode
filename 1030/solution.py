@@ -2,6 +2,14 @@ from typing import List
 
 class Solution:
     def allCellsDistOrder(self, rows:int, cols: int, rCenter: int, cCenter: int) -> List[List[int]]:
+        d = {}
+        for i in range(rows):
+            for j in range(cols):
+                d[(i, j)] = abs(i - rCenter) + abs(j - cCenter)
+        si = sorted(d.items(), key=lambda item: item[1])
+        sd = dict(si)
+        return [[i[0], i[1]] for i in list(sd.keys())]
+
 
 def test_1():
     sol = Solution()
@@ -22,7 +30,7 @@ def test_2():
     output1 = [[0,1],[0,0],[1,1],[1,0]]
     output2 = [[0,1],[1,1],[0,0],[1,0]]
     res = sol.allCellsDistOrder(rows, cols, rCenter, cCenter)
-    assert res == output1 or res = output2
+    assert res == output1 or res == output2
 
 def test_3():
     sol = Solution()
@@ -33,4 +41,4 @@ def test_3():
     output1 = [[1,2],[0,2],[1,1],[0,1],[1,0],[0,0]]
     output2 = [[1,2],[1,1],[0,2],[1,0],[0,1],[0,0]]
     res = sol.allCellsDistOrder(rows, cols, rCenter, cCenter)
-    assert res == output1 or res = output2
+    assert res == output1 or res == output2
